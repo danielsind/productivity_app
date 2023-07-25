@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-l*uy(wo_9kw2y!sm=@ve$+#5r43*8y*rc92x2mhai@gclk*!iz
 DEBUG = True
 
 ALLOWED_HOSTS = []
+AUTH_USER_MODEL = 'users.User'  
 
 
 # Application definition
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'productivity_app',
     'task',
+    'users',
     'rest_framework',
 ]
 
