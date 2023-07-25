@@ -4,7 +4,7 @@ from django.contrib.auth.models import ( BaseUserManager
  )
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password=None):
+    def create_user(self, email, password=None, **extra_fileds):
         if not email:
             raise ValueError('Users must have an email address')
         
@@ -23,8 +23,32 @@ class User (AbstractBaseUser):
     )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
 
+
     objects = CustomUserManager()
+
+    def has_perm(self, perm, obj=None):
+        return True  # Modify this method to handle object-level permissions if needed
+
+    def has_module_perms(self, app_label):
+        return True
+class UserProfile(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        )
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    face_book_profile = models.CharField(max_length=150)
+    twitter_profile = models.CharField(max_length=150)
+    image = models.ImageField(upload_to='profile_images', null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
 
