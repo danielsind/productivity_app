@@ -4,7 +4,7 @@ from django.contrib.auth.models import ( BaseUserManager
  )
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password=None, **extra_fileds):
+    def create_user_model(self, email, password=None, **extra_fileds):
         if not email:
             raise ValueError('Users must have an email address')
         
@@ -21,6 +21,7 @@ class User (AbstractBaseUser):
         max_length= 225,
         unique=True,
     )
+    username = models.CharField(max_length=150, unique=True, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
@@ -30,7 +31,7 @@ class User (AbstractBaseUser):
 
     objects = CustomUserManager()
 
-    def has_perm(self, perm, obj=None):
+    def has_perms(self, perm, obj=None):
         return True  # Modify this method to handle object-level permissions if needed
 
     def has_module_perms(self, app_label):
@@ -49,6 +50,6 @@ class UserProfile(models.Model):
     image = models.ImageField(upload_to='profile_images', null=True, blank=True)
 
     def __str__(self):
-        return self.user.username
+        return self.user.email
 
 
