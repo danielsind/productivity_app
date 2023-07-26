@@ -32,7 +32,7 @@ class User (AbstractBaseUser):
     objects = CustomUserManager()
 
     def has_perms(self, perm, obj=None):
-        return True  # Modify this method to handle object-level permissions if needed
+        return True 
 
     def has_module_perms(self, app_label):
         return True
