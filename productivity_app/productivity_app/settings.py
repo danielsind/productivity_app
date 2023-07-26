@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'productivity_app',
     'task',
+    'utils',
+    'tasks_list',
     'users',
     'rest_framework',
 ]
