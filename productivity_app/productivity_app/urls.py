@@ -22,5 +22,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('tasks/', include('task.urls')),
     path('tasks_list/', include('tasks_list.urls')),
-    path('users/', include('users.urls'))
+    path('users/', include('users.urls')),
 ]
